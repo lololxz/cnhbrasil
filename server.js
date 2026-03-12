@@ -83,7 +83,11 @@ app.all('/api/pix', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-    console.log(`Rota PIX disponível em: http://localhost:${PORT}/api/pix`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando na porta ${PORT}`);
+        console.log(`Rota PIX disponível em: http://localhost:${PORT}/api/pix`);
+    });
+}
+
+module.exports = app;
