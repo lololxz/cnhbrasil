@@ -21446,7 +21446,7 @@ function RE() {
                                         children: ["• Taxa de Expedição", l.jsx("br", {}), "do Documento (TED)"]
                                     }), l.jsx("span", {
                                         className: "font-bold whitespace-nowrap",
-                                        children: "R$26,13"
+                                        children: "R$16,70"
                                     })]
                                 }), l.jsxs("div", {
                                     className: "flex justify-between items-start",
@@ -21454,7 +21454,7 @@ function RE() {
                                         children: ["• Taxa de Serviço", l.jsx("br", {}), "Administrativo (TSA)"]
                                     }), l.jsx("span", {
                                         className: "font-bold whitespace-nowrap",
-                                        children: "R$19,30"
+                                        children: "R$16,60"
                                     })]
                                 }), l.jsxs("div", {
                                     className: "flex justify-between items-start",
@@ -21462,7 +21462,7 @@ function RE() {
                                         children: ["• Taxa de Processamento", l.jsx("br", {}), "e Emissão (TPE)"]
                                     }), l.jsx("span", {
                                         className: "font-bold whitespace-nowrap",
-                                        children: "R$19,30"
+                                        children: "R$16,60"
                                     })]
                                 }), l.jsx("hr", {
                                     className: "my-2"
@@ -23052,7 +23052,7 @@ Assim que realizar o pagamento das taxas no valor de R$ 49,90, clique no botão 
                                             children: "TAXA DE EXPEDIÇÃO DE DOCUMENTO (TED)"
                                         }), l.jsx("span", {
                                             className: "font-semibold",
-                                            children: "26,13"
+                                            children: "16,70"
                                         })]
                                     }), l.jsxs("div", {
                                         className: "flex justify-between py-1 border-b border-gray-200",
@@ -23061,7 +23061,7 @@ Assim que realizar o pagamento das taxas no valor de R$ 49,90, clique no botão 
                                             children: "TAXA DE SERVIÇOS ADMINISTRATIVOS (TSA)"
                                         }), l.jsx("span", {
                                             className: "font-semibold",
-                                            children: "19,30"
+                                            children: "16,60"
                                         })]
                                     }), l.jsxs("div", {
                                         className: "flex justify-between py-1 border-b border-gray-200",
@@ -23070,7 +23070,7 @@ Assim que realizar o pagamento das taxas no valor de R$ 49,90, clique no botão 
                                             children: "TAXA DE PROCESSAMENTO ELETRÔNICO (TPE)"
                                         }), l.jsx("span", {
                                             className: "font-semibold",
-                                            children: "19,30"
+                                            children: "16,60"
                                         })]
                                     }), l.jsxs("div", {
                                         className: "flex justify-between py-2 bg-gray-100 px-2 font-bold",
