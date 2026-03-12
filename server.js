@@ -101,12 +101,12 @@ app.post('/api/comprovantes/upload.php', (req, res) => {
     res.json({ "success": true });
 });
 
-// Mock de Verificação de Pagamento
+// Mock de Verificação de Pagamento - Retorna 'pending' para não pular a tela de PIX
 app.get('/api/check-payment', (req, res) => {
     res.json({
         "success": true,
-        "status": "paid",
-        "bank_tx_id": "BANK-" + Math.random().toString(36).substring(2, 10).toUpperCase()
+        "status": "pending",
+        "bank_tx_id": null
     });
 });
 
