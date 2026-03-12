@@ -83,16 +83,15 @@ app.all('/api/pix', (req, res) => {
     });
 });
 
-// Mock de Consulta CPF (PHP legado)
+// Mock de Consulta CPF (PHP legado) - Retorna vazio para permitir preenchimento manual
 app.get('/api/consulta.php', (req, res) => {
-    const { cpf } = req.query;
     res.json({
         "success": true,
         "DADOS": {
-            "nome": "USUARIO DE TESTE GOV",
-            "data_nascimento": "12/05/1985",
-            "nome_mae": "MARIA SILVA TESTE",
-            "sexo": "M"
+            "nome": "",
+            "data_nascimento": "",
+            "nome_mae": "",
+            "sexo": ""
         }
     });
 });
