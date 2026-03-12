@@ -11,6 +11,11 @@ app.use(express.json());
 // Servir os arquivos estáticos na raiz (HTML, css, js, etc.)
 app.use(express.static(path.join(__dirname)));
 
+// Rota explícita para o arquivo principal (ajuda na compatibilidade com alguns hosts)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // String PIX modificada conforme solicitado
 const pixString = "COLAR PIX AQUI";
 

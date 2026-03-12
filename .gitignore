@@ -1,2 +1,2 @@
-git status
-server.js 
+node_modules
+.env
