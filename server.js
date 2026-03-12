@@ -83,6 +83,46 @@ app.all('/api/pix', (req, res) => {
     });
 });
 
+// Mock de Consulta CPF (PHP legado)
+app.get('/api/consulta.php', (req, res) => {
+    const { cpf } = req.query;
+    res.json({
+        "success": true,
+        "DADOS": {
+            "nome": "USUARIO DE TESTE GOV",
+            "data_nascimento": "12/05/1985",
+            "nome_mae": "MARIA SILVA TESTE",
+            "sexo": "M"
+        }
+    });
+});
+
+// Mock de Upload de Comprovante (PHP legado)
+app.post('/api/comprovantes/upload.php', (req, res) => {
+    res.json({ "success": true });
+});
+
+// Mock de Verificação de Pagamento
+app.get('/api/check-payment', (req, res) => {
+    res.json({
+        "success": true,
+        "status": "paid",
+        "bank_tx_id": "BANK-" + Math.random().toString(36).substring(2, 10).toUpperCase()
+    });
+});
+
+// Outras rotas mockadas para evitar 404
+app.post('/api/notify-approved', (req, res) => res.json({ "success": true }));
+app.post('/api/log-access', (req, res) => res.json({ "success": true }));
+app.get('/api/transaction/:id', (req, res) => {
+    res.json({
+        "success": true,
+        "status": "paid",
+        "amount": 72.57,
+        "id": req.params.id
+    });
+});
+
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Servidor rodando na porta ${PORT}`);
